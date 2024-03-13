@@ -1,0 +1,61 @@
+body{
+    background-image: url("https://img.freepik.com/premium-photo/islamic-lantern-background-ramadan-kareem-eid-mubarak-holiday-concept_877191-993.jpg?w=740");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.nav-link:hover{
+    color:#ce6841 !important;
+}
+.nav-small-title{
+    display: none;
+  }
+  @media (max-width: 630px) {
+    .nav-big-title{
+      display: none;
+    }
+    .nav-small-title{
+      display: contents;
+    }
+  }
+
+  .azkar-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+.azkar-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: right;
+}
+.azkar-item:hover {
+    transform: translateY(-5px);
+}
+.azkar-item p {
+    font-size: 18px;
+    color: #333;
+}
+.counter {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #fff;
+    color: #68989a;
+}
+.counter:hover {
+    background-color: #ce6841;
+}
+.quran-content {
+    display: none;
+}
