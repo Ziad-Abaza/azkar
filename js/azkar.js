@@ -1,81 +1,84 @@
-window.onload = () => {
-    fetch('../data/azkar.json')
-        .then(response => response.json())
-        .then(data => {
-            const AzkarList = document.getElementById('AzkarList');
-            const morningAzkar = data.morningAzkar;
-            const eveningAzkar = data.eveningAzkar;
+window.onload = async () => {
+    try {
+        const response = await fetch('./data/azkar.json');
+        const data = await response.json();
 
-            const morningAzkarLink = document.getElementById('morningAzkarLink');
-            const eveningAzkarLink = document.getElementById('eveningAzkarLink');
-            const quranLink = document.getElementById('quranLink');
-            const quranContent = document.getElementById('quranContent');
+        const AzkarList = document.getElementById('AzkarList');
+        const morningAzkar = data.morningAzkar;
+        const eveningAzkar = data.eveningAzkar;
 
-            function createAzkarItems(azkar, container) {
-                container.innerHTML = ''; 
+        const morningAzkarLink = document.getElementById('morningAzkarLink');
+        const eveningAzkarLink = document.getElementById('eveningAzkarLink');
+        const quranLink = document.getElementById('quranLink');
+        const quranContent = document.getElementById('quranContent');
 
-                azkar.forEach(azkarItem => {
-                    const azkarItemElement = document.createElement('div');
-                    azkarItemElement.classList.add('azkar-item');
+        function createAzkarItems(azkar, container) {
+            container.innerHTML = ''; 
 
-                    const azkarText = document.createElement('p');
-                    azkarText.textContent = azkarItem.azkar;
+            azkar.forEach(azkarItem => {
+                const azkarItemElement = document.createElement('div');
+                azkarItemElement.classList.add('azkar-item');
 
-                    const counterButton = document.createElement('button');
-                    counterButton.classList.add('counter');
-                    counterButton.textContent = azkarItem.count;
-                    counterButton.addEventListener('click', () => {
-                        if (azkarItem.count > 0) {
-                            azkarItem.count--;
-                            counterButton.textContent = azkarItem.count;
-                        }
-                    });
+                const azkarText = document.createElement('p');
+                azkarText.textContent = azkarItem.azkar;
 
-                    azkarItemElement.appendChild(azkarText);
-                    azkarItemElement.appendChild(counterButton);
-
-                    container.appendChild(azkarItemElement);
+                const counterButton = document.createElement('button');
+                counterButton.classList.add('counter');
+                counterButton.textContent = azkarItem.count;
+                counterButton.addEventListener('click', () => {
+                    if (azkarItem.count > 0) {
+                        azkarItem.count--;
+                        counterButton.textContent = azkarItem.count;
+                    }
                 });
-            }
 
-            createAzkarItems(morningAzkar, AzkarList);
+                azkarItemElement.appendChild(azkarText);
+                azkarItemElement.appendChild(counterButton);
 
-            function toggleAzkar(azkarType) {
-                if (azkarType === 'morning') {
-                    createAzkarItems(morningAzkar, AzkarList);
-                    document.getElementById('azkarTitle').innerText = 'أذكار الصباح';
-                } else if (azkarType === 'evening') {
-                    createAzkarItems(eveningAzkar, AzkarList);
-                    document.getElementById('azkarTitle').innerText = 'أذكار المساء';
-                } else if (azkarType === 'quran') {
-                    createAzkarItems(eveningAzkar, AzkarList);
-                    document.getElementById('azkarTitle').innerText = 'تنزيل القرآن الكريم:';
-                }
-            }
-
-            function showQuranContent() {
-                AzkarList.style.display = 'none';
-                quranContent.style.display = 'block';
-                toggleAzkar('quran');
-            }
-
-            morningAzkarLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                toggleAzkar('morning');
-                AzkarList.style.display = 'grid';
-                quranContent.style.display = 'none';
+                container.appendChild(azkarItemElement);
             });
+        }
 
-            eveningAzkarLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                toggleAzkar('evening');
-                AzkarList.style.display = 'grid';
-                quranContent.style.display = 'none';
-            });
+        createAzkarItems(morningAzkar, AzkarList);
 
-            quranLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                showQuranContent();
-            });
+        function toggleAzkar(azkarType) {
+            if (azkarType === 'morning') {
+                createAzkarItems(morningAzkar, AzkarList);
+                document.getElementById('azkarTitle').innerText = 'أذكار الصباح';
+            } else if (azkarType === 'evening') {
+                createAzkarItems(eveningAzkar, AzkarList);
+                document.getElementById('azkarTitle').innerText = 'أذكار المساء';
+            } else if (azkarType === 'quran') {
+                createAzkarItems(eveningAzkar, AzkarList);
+                document.getElementById('azkarTitle').innerText = 'تنزيل القرآن الكريم:';
+            }
+        }
+
+        function showQuranContent() {
+            AzkarList.style.display = 'none';
+            quranContent.style.display = 'block';
+            toggleAzkar('quran');
+        }
+
+        morningAzkarLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            toggleAzkar('morning');
+            AzkarList.style.display = 'grid';
+            quranContent.style.display = 'none';
         });
+
+        eveningAzkarLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            toggleAzkar('evening');
+            AzkarList.style.display = 'grid';
+            quranContent.style.display = 'none';
+        });
+
+        quranLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            showQuranContent();
+        });
+    } catch (error) {
+        console.error('Error fetching Azkar:', error);
+    }
 };
