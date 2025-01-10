@@ -1,9 +1,14 @@
 let page = 1;
 const itemsPerPage = 10;
 let azkarDataCache = null;
-let isLoading = false; 
-let currentAzkarType = null; 
+let isLoading = false;
+let currentAzkarType = null;
 
+/*
+|---------------------------------------------------
+| Fetch Azkar data from JSON file
+|---------------------------------------------------
+*/
 function fetchAzkarData() {
   if (azkarDataCache) {
     initializeAzkarUI(azkarDataCache);
@@ -22,12 +27,22 @@ function fetchAzkarData() {
     .catch((error) => console.error("Error fetching Azkar data:", error));
 }
 
+/*
+|---------------------------------------------------
+| Initialize UI elements for Azkar data
+|---------------------------------------------------
+*/
 function initializeAzkarUI(data) {
   const AzkarList = document.getElementById("AzkarList");
   const quranContent = document.getElementById("quranContent");
   const morningAzkar = data.morningAzkar;
   const eveningAzkar = data.eveningAzkar;
 
+  /*
+  |---------------------------------------------------
+  | Create Azkar items and append to the container
+  |---------------------------------------------------
+  */
   function createAzkarItems(azkar, container, page) {
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
@@ -50,19 +65,18 @@ function initializeAzkarUI(data) {
       const counterButton = document.createElement("button");
       counterButton.classList.add("counter");
       counterButton.textContent = azkarItem.count;
-        counterButton.addEventListener("click", () => {
+      counterButton.addEventListener("click", () => {
         if (azkarItem.count > 0) {
-            azkarItem.count--;
-            counterButton.textContent = azkarItem.count;
+          azkarItem.count--;
+          counterButton.textContent = azkarItem.count;
 
-            if (azkarItem.count === 0) {
-            counterButton.disabled = true; 
-            counterButton.style.backgroundColor = "#d35400"; 
-            counterButton.style.cursor = "not-allowed"; 
-            }
+          if (azkarItem.count === 0) {
+            counterButton.disabled = true;
+            counterButton.style.backgroundColor = "#d35400";
+            counterButton.style.cursor = "not-allowed";
+          }
         }
-        });
-
+      });
 
       azkarItemElement.appendChild(azkarText);
       azkarItemElement.appendChild(counterButton);
@@ -71,9 +85,14 @@ function initializeAzkarUI(data) {
     });
 
     container.appendChild(fragment);
-    isLoading = false; 
+    isLoading = false;
   }
 
+  /*
+  |---------------------------------------------------
+  | Toggle between morning and evening Azkar
+  |---------------------------------------------------
+  */
   function toggleAzkar(azkarType) {
     if (currentAzkarType === azkarType) return;
 
@@ -93,6 +112,11 @@ function initializeAzkarUI(data) {
     }
   }
 
+  /*
+  |---------------------------------------------------
+  | Show Quran content and hide Azkar list
+  |---------------------------------------------------
+  */
   function showQuranContent() {
     AzkarList.style.display = "none";
     quranContent.style.display = "block";
@@ -100,6 +124,11 @@ function initializeAzkarUI(data) {
     window.removeEventListener("scroll", handleScroll);
   }
 
+  /*
+  |---------------------------------------------------
+  | Handle scroll event to load more Azkar items
+  |---------------------------------------------------
+  */
   function handleScroll() {
     if (
       isLoading ||
@@ -139,4 +168,9 @@ function initializeAzkarUI(data) {
   toggleAzkar("morning");
 }
 
+/*
+|---------------------------------------------------
+| Fetch Azkar data on page load
+|---------------------------------------------------
+*/
 window.onload = fetchAzkarData;

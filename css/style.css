@@ -1,61 +1,140 @@
-/* body{
-    background-image: url("https://img.freepik.com/premium-photo/islamic-lantern-background-ramadan-kareem-eid-mubarak-holiday-concept_877191-993.jpg?w=740");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+body {
+	background: linear-gradient(135deg, #2c3e50, #4ca1af);
+	font-family: "Tajawal", sans-serif;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
-.nav-link:hover{
-    color:#ce6841 !important;
-}
-.nav-small-title{
-    display: none;
-  }
-  @media (max-width: 630px) {
-    .nav-big-title{
-      display: none;
-    }
-    .nav-small-title{
-      display: contents;
-    }
-  }
 
-  .azkar-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+main {
+	flex-grow: 1;
 }
+
+.navbar {
+	border-bottom: 2px solid #fff;
+}
+
+.navbar-brand img {
+	border-radius: 50%;
+}
+
+.navbar-nav .nav-link {
+	font-size: 18px;
+	transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+	color: #ffd700;
+	transform: translateY(-3px);
+}
+
+#azkarTitle {
+	font-size: 2rem;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .azkar-item {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    text-align: right;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	padding: 15px;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	animation: fadeIn 0.5s ease;
+	gap: 5px;
 }
-.azkar-item:hover {
-    transform: translateY(-5px);
-}
+
 .azkar-item p {
-    font-size: 18px;
-    color: #333;
+	font-size: 1.2rem;
+	margin: 0;
 }
+
 .counter {
-    width: 70px;
-    height: 70px;
-    font-size: 24px;
-    font-weight: bold;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #fff;
-    color: #68989a;
+	background: #ffd700;
+	border: none;
+	border-radius: 50px;
+	color: #000;
+	padding: 8px 32px;
+	font-size: 1.2rem;
+	cursor: pointer;
+	transition: transform 0.3s ease, background-color 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.counter:hover {
-    background-color: #ce6841;
+
+.counter:active {
+	background-color: #d35400;
 }
-.quran-content {
-    display: none;
-} */
+
+.counter i {
+	margin-left: 5px;
+}
+
+footer {
+	background: #222;
+	color: #fff;
+	text-align: center;
+	padding: 20px 0;
+	position: relative;
+	margin-top: auto;
+}
+
+footer a {
+	color: #ffd700;
+	margin: 0 10px;
+	font-size: 1.5rem;
+}
+
+footer a:hover {
+	color: #fff;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+}
+
+.quran-content .card {
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid #ffd700;
+	border-radius: 15px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	margin-top: 20px;
+	color: #fff;
+}
+
+.quran-content .card-body a {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	color: #000;
+	background-color: #ffd700;
+	border-radius: 50px;
+	padding: 10px 20px;
+	font-size: 1.2rem;
+	text-decoration: none;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	width: 80%;
+	min-width: 200px;
+}
+
+.quran-content .card-body a:hover {
+	background-color: #f39c12;
+	transform: translateY(-3px);
+}
