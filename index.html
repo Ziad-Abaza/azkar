@@ -8,26 +8,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            font-family: "Tajawal", sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex-grow: 1;
+        }
+        .navbar {
+            border-bottom: 2px solid #fff;
+        }
+        .navbar-brand img {
+            border-radius: 50%;
+        }
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffd700;
+            transform: translateY(-3px);
+        }
+        #azkarTitle {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .azkar-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+            gap: 5px;
+        }
+        .azkar-item p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        .counter {
+            background: #ffd700;
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            padding: 8px 32px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .counter:active {
+            background-color: #d35400;
+        }
+        .counter i {
+            margin-left: 5px;
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            margin-top: auto;
+        }
+        footer a {
+            color: #ffd700;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .quran-content .card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #ffd700;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 20px;
+            color: #fff;
+        }
+        .quran-content .card-body a {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #000;
+            background-color: #ffd700;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            width: 80%;
+            min-width: 200px;
+        }
+        .quran-content .card-body a:hover {
+            background-color: #f39c12;
+            transform: translateY(-3px);
+        }
+    </style>
 </head>
-<body class="bg-color-2">
+<body>
     <header>
         <nav id="site-nav" class="navbar navbar-expand-lg bg-color-1">
-            <div class="container-fluid d-flex ">
+            <div class="container-fluid d-flex">
                 <a class="navbar-brand color-4" href="#">
                     <img src="img/logo.png" alt="Logo" width="70px" class="mr-2">
                     <span class="nav-big-title">جامعة برج العرب التكنولوجية</span>
-                    <span class="nav-small-title">BATU</span>
-                </a>            
+                </a>
                 <a class="navbar-brand color-4" href="https://ziad-abaza.github.io/it-club-socialMedia/">
                     <img src="img/itclub (1).png" alt="Logo" width="70px" class="mr-2">
-                    <span class="nav-big-title">information technology club</span>
-                    <span class="nav-small-title">IT-CLUB</span>
-                </a>            
+                    <span class="nav-big-title">IT-CLUB</span>
+                </a>
             </div>
         </nav>
         <nav id="azkar-nav" class="navbar navbar-expand-lg bg-color-3">
-            <div class="container-fluid d-flex ">
+            <div class="container-fluid">
                 <ul class="navbar-nav ml-auto w-100 flex-row gap-5 justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#" id="morningAzkarLink">أذكار الصباح</a>
@@ -37,26 +156,31 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#" id="quranLink">القرآن الكريم</a>
-                    </li>
-                </ul>
+                    </ul>
             </div>
         </nav>
     </header>
-
-    <div class="container mt-5">
-        <h2 id="azkarTitle" class="text-center mt-3 mb-4 text-white">أذكار الصباح</h2>
+    <main class="container mt-5 mb-5">
+        <h2 id="azkarTitle" class="text-center mt-3 mb-4">أذكار الصباح</h2>
         <div class="azkar-list" id="AzkarList"></div>
         <div class="quran-content" id="quranContent" style="display: none;">
             <div class="card">
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center"><a style="min-width: 200px " href="https://dm.qurancomplex.gov.sa/Download/1441-AI-hafs.zip" class="btn btn-primary btn-sm" target="_blank">تنزيل PDF</a></li>
-                        <li class="list-group-item text-center"><a style="min-width: 200px " href="https://play.google.com/store/apps/details?id=com.simppro.quran.offline&hl=ar&gl=US&referrer=utm_source%3Dgoogle%26utm_medium%3Dorganic%26utm_term%3D%D9%85%D8%B5%D8%AD%D9%81&pli=1" class="btn btn-primary btn-sm"  target="_blank">تنزيل التطبيق</a></li>
-                    </ul>
+                <div class="card-body text-center">
+                    <p class="mb-4">
+                        لتحميل المصحف الشريف بتنسيق PDF أو تنزيل تطبيق خاص بالقرآن الكريم:
+                    </p>
+                    <a href="https://dm.qurancomplex.gov.sa/Download/1441-AI-hafs.zip" target="_blank">
+                        <i class="fas fa-file-download"></i>
+                        تنزيل المصحف PDF
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.simppro.quran.offline" target="_blank" class="mt-3 d-block">
+                        <i class="fas fa-mobile-alt"></i>
+                        تنزيل تطبيق القرآن
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <footer class="bg-color-3 text-center py-4">
         <div class="container">
             <div class="row">
@@ -74,7 +198,7 @@
                 </div>
             </div>
         </div>
-    </footer> 
+    </footer>
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
