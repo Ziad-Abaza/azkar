@@ -1,5 +1,5 @@
 let page = 1;
-const itemsPerPage = 10;
+const itemsPerPage = 5;
 let azkarDataCache = null;
 let isLoading = false;
 let currentAzkarType = null;
