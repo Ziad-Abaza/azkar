@@ -3,18 +3,17 @@ const itemsPerPage = 10;
 let azkarDataCache = null;
 let isLoading = false;
 let currentAzkarType = null;
+let dataLoaded = {
+  morningAzkar: false,
+  eveningAzkar: false,
+};
 
 /*
 |---------------------------------------------------
-| Fetch Azkar data from JSON file
+| Fetch Azkar data from JSON file incrementally
 |---------------------------------------------------
 */
 function fetchAzkarData() {
-  if (azkarDataCache) {
-    initializeAzkarUI(azkarDataCache);
-    return;
-  }
-
   fetch("./data/azkar.json")
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok");
@@ -101,13 +100,26 @@ function initializeAzkarUI(data) {
     AzkarList.style.display = "grid";
     page = 1;
     currentAzkarType = azkarType;
+    isLoading = false; // Reset loading flag when switching Azkar types
     window.addEventListener("scroll", handleScroll);
 
     if (azkarType === "morning") {
-      createAzkarItems(morningAzkar, AzkarList, page);
+      if (!dataLoaded.morningAzkar) {
+        createAzkarItems(morningAzkar, AzkarList, page);
+        dataLoaded.morningAzkar = true;
+      } else {
+        AzkarList.innerHTML = ""; // Clear current items before appending new
+        createAzkarItems(morningAzkar, AzkarList, page);
+      }
       document.getElementById("azkarTitle").innerText = "أذكار الصباح";
     } else if (azkarType === "evening") {
-      createAzkarItems(eveningAzkar, AzkarList, page);
+      if (!dataLoaded.eveningAzkar) {
+        createAzkarItems(eveningAzkar, AzkarList, page);
+        dataLoaded.eveningAzkar = true;
+      } else {
+        AzkarList.innerHTML = ""; // Clear current items before appending new
+        createAzkarItems(eveningAzkar, AzkarList, page);
+      }
       document.getElementById("azkarTitle").innerText = "أذكار المساء";
     }
   }
