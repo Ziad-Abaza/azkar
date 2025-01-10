@@ -138,3 +138,16 @@ footer a:hover {
 	background-color: #f39c12;
 	transform: translateY(-3px);
 }
+
+@media screen and (max-width:470px) {
+	.navbar-brand .nav-big-title {
+
+		/* font-size: 12px; */
+		display: none;
+	}
+
+	.navbar-brand .nav-big-title-small {
+		display: inline;
+	}
+
+}
