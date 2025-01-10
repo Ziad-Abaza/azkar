@@ -14,9 +14,6 @@ let dataLoaded = {
 |---------------------------------------------------
 */
 function fetchAzkarData() {
-  // Show loader while data is loading
-  document.getElementById("loadingSpinner").style.display = "flex";
-
   fetch("./data/azkar.json")
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok");
@@ -25,16 +22,8 @@ function fetchAzkarData() {
     .then((data) => {
       azkarDataCache = data;
       initializeAzkarUI(data);
-
-      // Hide loader after data is fetched
-      document.getElementById("loadingSpinner").style.display = "none";
     })
-    .catch((error) => {
-      console.error("Error fetching Azkar data:", error);
-
-      // Hide loader in case of error
-      document.getElementById("loadingSpinner").style.display = "none";
-    });
+    .catch((error) => console.error("Error fetching Azkar data:", error));
 }
 
 /*
@@ -99,10 +88,10 @@ function initializeAzkarUI(data) {
   }
 
   /*
-|---------------------------------------------------
-| Toggle between morning and evening Azkar
-|---------------------------------------------------
-*/
+  |---------------------------------------------------
+  | Toggle between morning and evening Azkar
+  |---------------------------------------------------
+  */
   function toggleAzkar(azkarType) {
     if (currentAzkarType === azkarType) return;
 
@@ -159,9 +148,6 @@ function initializeAzkarUI(data) {
     )
       return;
 
-    // Show loader while fetching additional Azkar items
-    document.getElementById("loadingSpinner").style.display = "flex";
-
     isLoading = true;
     page++;
 
@@ -170,9 +156,6 @@ function initializeAzkarUI(data) {
     } else if (currentAzkarType === "evening") {
       createAzkarItems(eveningAzkar, AzkarList, page);
     }
-
-    // Hide loader after new items are loaded
-    document.getElementById("loadingSpinner").style.display = "none";
   }
 
   document
