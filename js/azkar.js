@@ -92,6 +92,11 @@ function initializeAzkarUI(data) {
   | Toggle between morning and evening Azkar
   |---------------------------------------------------
   */
+  /*
+|---------------------------------------------------
+| Toggle between morning and evening Azkar
+|---------------------------------------------------
+*/
   function toggleAzkar(azkarType) {
     if (currentAzkarType === azkarType) return;
 
@@ -100,18 +105,25 @@ function initializeAzkarUI(data) {
     AzkarList.style.display = "grid";
     page = 1;
     currentAzkarType = azkarType;
+    isLoading = false; // Reset loading flag when switching Azkar types
     window.addEventListener("scroll", handleScroll);
 
     if (azkarType === "morning") {
       if (!dataLoaded.morningAzkar) {
         createAzkarItems(morningAzkar, AzkarList, page);
         dataLoaded.morningAzkar = true;
+      } else {
+        AzkarList.innerHTML = ""; // Clear current items before appending new
+        createAzkarItems(morningAzkar, AzkarList, page);
       }
       document.getElementById("azkarTitle").innerText = "أذكار الصباح";
     } else if (azkarType === "evening") {
       if (!dataLoaded.eveningAzkar) {
         createAzkarItems(eveningAzkar, AzkarList, page);
         dataLoaded.eveningAzkar = true;
+      } else {
+        AzkarList.innerHTML = ""; // Clear current items before appending new
+        createAzkarItems(eveningAzkar, AzkarList, page);
       }
       document.getElementById("azkarTitle").innerText = "أذكار المساء";
     }
